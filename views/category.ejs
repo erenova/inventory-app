@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>categories</title>
+  </head>
+  <body class="p-4">
+    <% if (!locals.newCategory) { %>
+    <a href="/category/new">Add new Category</a>
+    <% } %> <% if (locals.newCategory) { %> <%- include('partials/newCategory')
+    %> <% } %>
+    <h3 class="text-3xl mt-10 mb-4">Categories</h3>
+    <div class="flex gap-8 h-12 min-w-24">
+      <% if (locals.categories) { %> <% categories.map(element => { %>
+      <div class="border flex justify-center items-center min-w-24 text-center">
+        <a href="/category/<%=element.id%>" class="min-w-24"
+          ><%=element.name%></a
+        >
+      </div>
+      <% }) %> <% } %>
+    </div>
+  </body>
+</html>
