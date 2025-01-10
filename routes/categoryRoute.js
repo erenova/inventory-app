@@ -6,6 +6,27 @@ categoryRouter.get("/", categoryController.getCategories);
 categoryRouter.post("/", categoryController.postNewCategoryForm);
 categoryRouter.get("/new", categoryController.getNewCategoryForm);
 categoryRouter.get("/deleteall", categoryController.deleteAllCategories);
-categoryRouter.get("/:categoryId", categoryController.getCategoryItems);
+categoryRouter.get(
+  "/delete/:categoryId",
+  categoryController.deleteCategoryById,
+);
 
+categoryRouter.get("/:categoryId", categoryController.getCategoryItems);
+categoryRouter.post("/:categoryId", categoryController.postNewItemForm);
+categoryRouter.get(
+  "/:categoryId/delete/:itemId",
+  categoryController.getDeleteItemById,
+);
+categoryRouter.post(
+  "/:categoryId/delete/:itemId",
+  categoryController.postDeleteItemById,
+);
+categoryRouter.get(
+  "/:categoryId/edit/:itemId",
+  categoryController.getEditItemById,
+);
+categoryRouter.post(
+  "/:categoryId/edit/:itemId",
+  categoryController.postEditItemById,
+);
 module.exports = categoryRouter;

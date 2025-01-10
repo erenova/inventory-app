@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="#" />
 
     <title>categories</title>
   </head>
@@ -17,7 +18,7 @@
       <% if (locals.categories) { %> <% categories.map(element => { %>
       <div class="border flex justify-center items-center min-w-24 text-center">
         <a href="/category/<%=element.id%>" class="min-w-24"
-          ><%=element.name%></a
+          ><%=element.category_name%></a
         >
       </div>
       <% }) %> <% } %>

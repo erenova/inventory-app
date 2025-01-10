@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="#" />
+
+    <title>Edit</title>
+  </head>
+  <body>
+    <div class="ml-6 w-60">
+      <h1 class="text-3xl text-center">Edit Item</h1>
+      <form
+        action="/category/<%= locals.categoryId %>/edit/<%=locals.item.id %>"
+        method="POST"
+        class="flex flex-col gap-4 border justify-center items-center text-center p-4"
+      >
+        <label for="itemName"
+          >Item Name <span class="text-red-500">*</span>:
+          <input
+            class="border rounded-xl px-2"
+            type="text"
+            required
+            name="itemName"
+            value="<%= locals.item.item_name %>"
+          />
+        </label>
+        <label for="itemLevel"
+          >Item Level <span class="text-red-500">*</span>:
+          <input
+            class="border rounded-xl px-2"
+            type="number"
+            required
+            name="itemLevel"
+            value="<%= locals.item.item_level %>"
+          />
+        </label>
+        <label for="equipLevel"
+          >Equip Level <span class="text-red-500">*</span>:
+          <input
+            class="border rounded-xl px-2"
+            type="number"
+            required
+            name="equipLevel"
+            value="<%= locals.item.equip_level %>"
+          />
+        </label>
+        <label for="imgUrl"
+          >Image URL:
+          <input
+            class="border rounded-xl px-2"
+            type="text"
+            name="imgUrl"
+            value="<%= locals.item.img_url %>"
+          />
+        </label>
+        <label for="password"
+          >Password <span class="text-red-500">*</span>:
+          <input
+            class="border rounded-xl px-2"
+            type="text"
+            required
+            id="password"
+            name="password"
+          />
+        </label>
+        <div>
+          <button
+            type="submit"
+            class="rounded border hover:bg-green-600 ring-2 ring-green-400 hover:ring-0 hover:text-white transition-colors p-1"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

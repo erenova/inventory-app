@@ -4,8 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="#" />
 
-    <title>Items</title>
+    <title>categories</title>
   </head>
-  <body></body>
+  <body class="p-4">
+    <a href="/" class=" ">Go To Categories</a>
+
+    <% if (locals.categoryId) { %> <%- include('partials/newItem') %> <% } %>
+    <h3 class="text-3xl mt-10 mb-4">Items</h3>
+    <div class="flex gap-8 min-w-24 text-center">
+      <% if (locals.items) { %> <% items.map(item => { %>
+      <div
+        class="border flex items-center justify-between flex-col max-w-40 p-4 break-words gap-2"
+      >
+        <div class="text-wrap max-w-36">
+          <span><%=item.item_name%> +<%= item.item_level %></span>
+          <div class="">EQ Level: <%= item.equip_level %></div>
+        </div>
+        <% if (item.img_url) { %>
+        <img src="<%= item.img_url %>" class="w-20 h-20" alt="" />
+
+        <% } %>
+        <div class="flex gap-4">
+          <a href="/category/<%= locals.categoryId %>/edit/<%= item.id %>"
+            >Edit</a
+          >
+          <a href="/category/<%= locals.categoryId %>/delete/<%= item.id %>"
+            >Delete</a
+          >
+        </div>
+      </div>
+      <% }) %> <% } %>
+    </div>
+  </body>
 </html>

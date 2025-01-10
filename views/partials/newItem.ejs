@@ -1,0 +1,32 @@
+<form
+  action="/category/<%= locals.categoryId %>"
+  method="post"
+  class="flex flex-col w-40 text-center mt-10"
+>
+  <label for="itemName">Item Name <span class="text-red-600">*</span>:</label>
+  <input class="border" type="text" name="itemName" id="itemName" required />
+  <label for="itemLevel">Item Level <span class="text-red-600">*</span>:</label>
+  <input
+    class="border"
+    type="number"
+    required
+    name="itemLevel"
+    id="itemLevel"
+  />
+  <label for="equipLevel"
+    >equip Level <span class="text-red-600">*</span>:</label
+  >
+  <input
+    class="border"
+    required
+    type="number"
+    name="equipLevel"
+    id="equipLevel"
+  />
+  <label for="imgUrl">Image URL:</label>
+  <input class="border" type="url" name="imgUrl" id="imgUrl" />
+  <label for="password">password <span class="text-red-600">*</span>:</label>
+  <input class="border" required type="text" name="password" id="password" />
+
+  <button class="">Add New Item</button>
+</form>
