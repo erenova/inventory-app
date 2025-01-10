@@ -1,4 +1,41 @@
+const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
+
+const postNewCategoryFormValidation = [
+  body("categoryName")
+    .isLength({ min: 3 })
+    .withMessage("Category name must be at least 3 characters long"),
+];
+const postNewItemFormValidation = [
+  body("itemName")
+    .isLength({ min: 3 })
+    .withMessage("Item name must be at least 3 characters long"),
+  body("itemLevel")
+    .isInt({ min: 1, max: 100 })
+    .withMessage("Item level must be between 1 and 100"),
+  body("equipLevel")
+    .isInt({ min: 1, max: 100 })
+    .withMessage("Equip level must be between 1 and 100"),
+  body("imgUrl")
+    .optional({ values: "falsy" })
+    .isURL()
+    .withMessage("Image URL must be a valid URL"),
+];
+const postEditItemByIdValidation = [
+  body("itemName")
+    .isLength({ min: 3 })
+    .withMessage("Item name must be at least 3 characters long"),
+  body("itemLevel")
+    .isInt({ min: 1, max: 100 })
+    .withMessage("Item level must be between 1 and 100"),
+  body("equipLevel")
+    .isInt({ min: 1, max: 100 })
+    .withMessage("Equip level must be between 1 and 100"),
+  body("imgUrl")
+    .optional({ values: "falsy" })
+    .isURL()
+    .withMessage("Image URL must be a valid URL"),
+];
 
 const getCategories = async (req, res) => {
   const categories = await db.getCategoriesDB();
@@ -27,6 +64,10 @@ const getNewCategoryForm = async (req, res) => {
   });
 };
 const postNewCategoryForm = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array()[0].msg });
+  }
   const { categoryName } = req.body;
   db.addNewCategoryDB(categoryName);
   res.redirect("category");
@@ -44,8 +85,13 @@ const getCategoryItems = async (req, res) => {
 };
 
 const postNewItemForm = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { categoryId } = req.params;
   const newItem = { categoryId, ...req.body };
+  console.log(req.body);
   db.addNewCategoryItemDB(newItem);
 
   res.redirect(`/category/${categoryId}`);
@@ -60,6 +106,10 @@ const getEditItemById = async (req, res) => {
   });
 };
 const postEditItemById = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { categoryId, itemId } = req.params;
   const updatedItem = req.body;
   await db.editItemByIdDB(itemId, updatedItem);
@@ -83,6 +133,9 @@ const postDeleteItemById = async (req, res) => {
 };
 
 module.exports = {
+  postNewCategoryFormValidation,
+  postNewItemFormValidation,
+  postEditItemByIdValidation,
   getCategories,
   getNewCategoryForm,
   postNewCategoryForm,

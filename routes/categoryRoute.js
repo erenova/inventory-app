@@ -3,7 +3,11 @@ const categoryController = require("../controllers/categoryController");
 const categoryRouter = Router();
 
 categoryRouter.get("/", categoryController.getCategories);
-categoryRouter.post("/", categoryController.postNewCategoryForm);
+categoryRouter.post(
+  "/",
+  categoryController.postNewCategoryFormValidation,
+  categoryController.postNewCategoryForm,
+);
 categoryRouter.get("/new", categoryController.getNewCategoryForm);
 categoryRouter.get("/deleteall", categoryController.deleteAllCategories);
 categoryRouter.get(
@@ -12,7 +16,11 @@ categoryRouter.get(
 );
 
 categoryRouter.get("/:categoryId", categoryController.getCategoryItems);
-categoryRouter.post("/:categoryId", categoryController.postNewItemForm);
+categoryRouter.post(
+  "/:categoryId",
+  categoryController.postNewItemFormValidation,
+  categoryController.postNewItemForm,
+);
 categoryRouter.get(
   "/:categoryId/delete/:itemId",
   categoryController.getDeleteItemById,
@@ -27,6 +35,7 @@ categoryRouter.get(
 );
 categoryRouter.post(
   "/:categoryId/edit/:itemId",
+  categoryController.postEditItemByIdValidation,
   categoryController.postEditItemById,
 );
 module.exports = categoryRouter;
