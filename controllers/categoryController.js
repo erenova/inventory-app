@@ -3,11 +3,17 @@ const db = require("../db/queries");
 
 const postNewCategoryFormValidation = [
   body("categoryName")
+    .trim()
+    .isEmpty()
+    .withMessage("Item name cannot be empty")
     .isLength({ min: 3 })
     .withMessage("Category name must be at least 3 characters long"),
 ];
 const postNewItemFormValidation = [
   body("itemName")
+    .trim()
+    .isEmpty()
+    .withMessage("Item name cannot be empty")
     .isLength({ min: 3 })
     .withMessage("Item name must be at least 3 characters long"),
   body("itemLevel")
@@ -23,6 +29,9 @@ const postNewItemFormValidation = [
 ];
 const postEditItemByIdValidation = [
   body("itemName")
+    .trim()
+    .isEmpty()
+    .withMessage("Item name cannot be empty")
     .isLength({ min: 3 })
     .withMessage("Item name must be at least 3 characters long"),
   body("itemLevel")
